@@ -31,7 +31,7 @@ echo 'PATH=$PATH:$HOME/.config/composer/vendor/bin' >> $HOME/.bashrc
 
 message "Create a new Laravel project"
 laravel new /var/www/laravel-app
-cd laravel-app
+cd /var/www/laravel-app
 
 message "Update dependencies"
 composer install
@@ -52,3 +52,27 @@ message "Starting local application service"
 echo "Point your browser to http://localhost:8000/"
 #php artisan serve
  php artisan serve --host=0.0.0.0  --port=8000
+
+ #create the login view
+composer require laravel/ui
+php artisan ui bootstrap
+php artisan ui bootstrap --auth
+npm install
+
+###########
+
+apt install npm
+npm install && npm run dev
+ php artisan migrate
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+
+# Close and reopen your terminal or run the command:
+source ~/.bashrc
+
+# Install a compatible Node.js version (e.g., 14.x)
+nvm install 14
+
+# Switch to the installed Node.js version
+nvm use 14
+
