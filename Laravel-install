@@ -27,10 +27,10 @@ PATH=$PATH:$HOME/.config/composer/vendor/bin
 echo 'PATH=$PATH:$HOME/.config/composer/vendor/bin' >> $HOME/.bashrc
 
 #move to www folder
-cd /var/www/
+#cd /var/www/
 
 message "Create a new Laravel project"
-laravel new laravel-app
+laravel new /var/www/laravel-app
 cd laravel-app
 
 message "Update dependencies"
