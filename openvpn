@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Update package lists and upgrade existing packages
+sudo apt update
+sudo apt upgrade -y
+
+# Install OpenVPN and OpenSSL
+sudo apt install -y openvpn openssl
+
+# Generate server key and certificate
+sudo openssl req -new -nodes -keyout server.key -out server.csr
+sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+# Copy the generated files to the OpenVPN directory
+sudo cp server.crt /etc/openvpn/
+sudo cp server.key /etc/openvpn/
+
+# Copy the sample server configuration file
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/
+
+# Modify the server configuration file
+sudo sed -i 's/proto udp/proto udp4/' /etc/openvpn/server.conf
+
+# Generate Diffie-Hellman parameters and TLS-auth key
+sudo openssl dhparam -out /etc/openvpn/dh2048.pem 2048
+sudo openvpn --genkey secret /etc/openvpn/ta.key
+
+# Set proper permissions and ownership
+sudo chmod 600 /etc/openvpn/dh2048.pem
+sudo chmod 600 /etc/openvpn/ta.key
+sudo chown root:root /etc/openvpn/dh2048.pem
+sudo chown root:root /etc/openvpn/ta.key
+
+# Start the OpenVPN service
+sudo systemctl start openvpn@server
