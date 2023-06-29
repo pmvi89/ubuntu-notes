@@ -1,0 +1,8 @@
+#Change timezone on ubuntu server
+sudo timedatectl set-timezone America/Chicago
+
+
+#Create user on mysql
+CREATE USER 'phpmyadmin'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
