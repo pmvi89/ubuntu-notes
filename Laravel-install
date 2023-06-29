@@ -1,0 +1,5 @@
+#https://fraigo.github.io/laravel-install-script/
+bash <(curl -s https://fraigo.github.io/laravel-install-script/laravel-install.sh)
+
+
+ php artisan serve --host=0.0.0.0  --port=8000
